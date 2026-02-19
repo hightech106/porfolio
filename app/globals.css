@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+html {
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  min-height: 100vh;
+}
+
+::selection {
+  background: rgba(99, 102, 241, 0.25);
+}
