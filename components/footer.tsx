@@ -1,5 +1,5 @@
 import { Container } from '@/components/ui/container';
-import { siteConfig } from '@/lib/site';
+import { hasLink, siteConfig } from '@/lib/site';
 
 export function Footer() {
   return (
@@ -11,28 +11,34 @@ export function Footer() {
           </p>
 
           <div className="flex gap-4 text-sm">
-            <a
-              href={siteConfig.links.github}
-              target="_blank"
-              rel="noreferrer"
-              className="text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-            >
-              GitHub
-            </a>
-            <a
-              href={siteConfig.links.linkedin}
-              target="_blank"
-              rel="noreferrer"
-              className="text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-            >
-              LinkedIn
-            </a>
-            <a
-              href={`mailto:${siteConfig.links.email}`}
-              className="text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-            >
-              Email
-            </a>
+            {hasLink(siteConfig.links.github) ? (
+              <a
+                href={siteConfig.links.github}
+                target="_blank"
+                rel="noreferrer"
+                className="text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+              >
+                GitHub
+              </a>
+            ) : null}
+            {hasLink(siteConfig.links.linkedin) ? (
+              <a
+                href={siteConfig.links.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                className="text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+              >
+                LinkedIn
+              </a>
+            ) : null}
+            {hasLink(siteConfig.links.email) ? (
+              <a
+                href={`mailto:${siteConfig.links.email}`}
+                className="text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+              >
+                Email
+              </a>
+            ) : null}
           </div>
         </div>
       </Container>

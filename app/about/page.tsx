@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
-import { siteConfig } from '@/lib/site';
+import { hasLink, siteConfig } from '@/lib/site';
 import { Container } from '@/components/ui/container';
 import { Section } from '@/components/ui/section';
 import { Card } from '@/components/ui/card';
@@ -24,23 +24,24 @@ export default function AboutPage() {
             <div className="lg:col-span-2 space-y-6">
               <Card>
                 <p className="text-sm text-slate-600 dark:text-slate-300">
-                  I build production web apps with a strong focus on UX, performance, and security.
-                  My default is simple: ship incrementally, keep code maintainable, and measure what
-                  matters.
+                  I’m based in {siteConfig.location} (remote-friendly) and build production web apps
+                  end-to-end. I grew up in Osaka, studied Computer Science at HKUST in Hong Kong,
+                  and have been shipping web products since.
                 </p>
                 <p className="mt-4 text-sm text-slate-600 dark:text-slate-300">
-                  I’m comfortable owning a feature end-to-end—UI, API, data model, and the boring
-                  parts like edge cases, validation, and rollout safety.
+                  I tend to do best in projects with complex UI, performance constraints, and “real”
+                  product requirements—plus practical GenAI work like RAG and Generative UI when it
+                  helps users.
                 </p>
               </Card>
 
               <Card>
                 <h3 className="text-sm font-semibold">How I work</h3>
                 <ul className="mt-3 space-y-2 text-sm text-slate-600 dark:text-slate-300">
-                  <li>• Start with constraints and user flows, not frameworks.</li>
-                  <li>• Prefer boring, proven architecture unless complexity is justified.</li>
-                  <li>• Make performance and accessibility part of the baseline.</li>
-                  <li>• Write code for the next engineer (often future me).</li>
+                  <li>• Start from requirements + constraints, then decide UI and data shape.</li>
+                  <li>• Ship in slices: small releases, clear rollout and fallback paths.</li>
+                  <li>• Treat performance, observability, and ops as a baseline—not a phase.</li>
+                  <li>• Keep a strong review culture: readable diffs, consistent patterns.</li>
                 </ul>
               </Card>
             </div>
@@ -49,22 +50,34 @@ export default function AboutPage() {
               <Card>
                 <h3 className="text-sm font-semibold">Links</h3>
                 <div className="mt-4 flex flex-col gap-2">
-                  <a
-                    href={siteConfig.links.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={buttonClasses({ variant: 'secondary', size: 'sm', className: 'justify-center' })}
-                  >
-                    GitHub
-                  </a>
-                  <a
-                    href={siteConfig.links.linkedin}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={buttonClasses({ variant: 'secondary', size: 'sm', className: 'justify-center' })}
-                  >
-                    LinkedIn
-                  </a>
+                  {hasLink(siteConfig.links.github) ? (
+                    <a
+                      href={siteConfig.links.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={buttonClasses({
+                        variant: 'secondary',
+                        size: 'sm',
+                        className: 'justify-center'
+                      })}
+                    >
+                      GitHub
+                    </a>
+                  ) : null}
+                  {hasLink(siteConfig.links.linkedin) ? (
+                    <a
+                      href={siteConfig.links.linkedin}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={buttonClasses({
+                        variant: 'secondary',
+                        size: 'sm',
+                        className: 'justify-center'
+                      })}
+                    >
+                      LinkedIn
+                    </a>
+                  ) : null}
                   <Link
                     href="/projects"
                     className={buttonClasses({ variant: 'primary', size: 'sm', className: 'justify-center' })}
@@ -77,7 +90,7 @@ export default function AboutPage() {
               <Card>
                 <h3 className="text-sm font-semibold">Based in</h3>
                 <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
-                  Remote-friendly • async communication • clear documentation
+                  {siteConfig.location} • remote-friendly • clear documentation
                 </p>
               </Card>
             </div>

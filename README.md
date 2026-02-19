@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is a personal portfolio built with Next.js (App Router) + TypeScript + Tailwind.
 
 ## Getting Started
 
@@ -16,9 +16,14 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Setup (replace these values)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Site URL**: set `NEXT_PUBLIC_SITE_URL` (ex: `https://your-domain.com`). If not set, it falls back to `https://example.com`.
+- **Social links**: update `lib/site.ts` (GitHub/LinkedIn). Empty links are not rendered.
+- **Resume PDF**: put files in `/public`:
+  - `resume-jp.pdf`
+  - `resume-en.pdf`
+  - (optional) `resume.pdf`
 
 ## Learn More
 

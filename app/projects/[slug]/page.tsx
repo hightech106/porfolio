@@ -32,7 +32,14 @@ export function generateMetadata({ params }: Props): Metadata {
       title: `${project.title} — ${siteConfig.name}`,
       description: project.description,
       url: `${siteConfig.url}/projects/${project.slug}`,
-      images: [{ url: '/og.png', width: 1200, height: 630, alt: project.title }]
+      images: [
+        {
+          url: `/og?title=${encodeURIComponent(project.title)}`,
+          width: 1200,
+          height: 630,
+          alt: project.title
+        }
+      ]
     }
   };
 }
@@ -65,14 +72,29 @@ export default function ProjectDetailPage({ params }: Props) {
                 </ul>
               </Card>
 
-              <Card>
-                <h3 className="text-sm font-semibold">What I learned</h3>
-                <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
-                  This project reinforced the value of shipping iteratively: lock down the critical
-                  paths (security + data integrity), then optimize UX and performance without
-                  breaking production.
-                </p>
-              </Card>
+              {project.sections?.map((s) => (
+                <Card key={s.title}>
+                  <h3 className="text-sm font-semibold">{s.title}</h3>
+                  {'body' in s ? (
+                    <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{s.body}</p>
+                  ) : (
+                    <ul className="mt-3 space-y-2 text-sm text-slate-600 dark:text-slate-300">
+                      {s.bullets.map((b) => (
+                        <li key={b}>• {b}</li>
+                      ))}
+                    </ul>
+                  )}
+                </Card>
+              ))}
+
+              {project.reflection ? (
+                <Card>
+                  <h3 className="text-sm font-semibold">Notes</h3>
+                  <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+                    {project.reflection}
+                  </p>
+                </Card>
+              ) : null}
             </div>
 
             <div className="space-y-6">
@@ -81,6 +103,17 @@ export default function ProjectDetailPage({ params }: Props) {
                   <h3 className="text-sm font-semibold">Details</h3>
                   <span className="text-xs text-slate-500 dark:text-slate-400">{project.dates}</span>
                 </div>
+
+                {project.company ? (
+                  <div className="mt-4">
+                    <h4 className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                      Company
+                    </h4>
+                    <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+                      {project.company}
+                    </p>
+                  </div>
+                ) : null}
 
                 <div className="mt-4">
                   <h4 className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
@@ -101,7 +134,7 @@ export default function ProjectDetailPage({ params }: Props) {
                       rel="noreferrer"
                       className={buttonClasses({ variant: 'primary', size: 'sm', className: 'w-full justify-center' })}
                     >
-                      Live demo
+                      Visit site
                     </a>
                   ) : null}
 
@@ -121,7 +154,7 @@ export default function ProjectDetailPage({ params }: Props) {
               <Card>
                 <h3 className="text-sm font-semibold">Want something similar?</h3>
                 <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
-                  If you’re building a product that needs speed, stability, and clean UI—let’s talk.
+                  If you’re building a product that needs complex UI, performance work, or GenAI features, feel free to reach out.
                 </p>
                 <Link
                   href="/contact"

@@ -21,7 +21,8 @@ export default function HomePage() {
         <div className="space-y-6">
           <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-sm text-slate-700 shadow-sm dark:border-slate-800 dark:bg-slate-950 dark:text-slate-300">
             <span className="h-2 w-2 rounded-full bg-emerald-500" aria-hidden="true" />
-            Available for new projects
+            {siteConfig.location}
+            {siteConfig.remoteFriendly ? ' • remote-friendly' : null}
           </div>
 
           <div className="space-y-3">
@@ -86,12 +87,25 @@ export default function HomePage() {
             </div>
           </Section>
 
-          <Section title="Skills" description="Tools I use to ship fast, safe, and maintainable software.">
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <Section title="Skills" description="What I use day-to-day in production.">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {[
-                { title: 'Frontend', items: ['Next.js', 'React', 'TypeScript', 'Tailwind'] },
-                { title: 'Backend', items: ['Node.js', 'Postgres', 'RLS', 'REST APIs'] },
-                { title: 'Product', items: ['SEO', 'Performance', 'Accessibility', 'DX'] }
+                {
+                  title: 'Frontend',
+                  items: ['TypeScript', 'React', 'Next.js (App Router)', 'Storybook', 'Tailwind / Chakra']
+                },
+                {
+                  title: 'Backend',
+                  items: ['Node.js', 'Express', 'GraphQL', 'PostgreSQL / MongoDB', 'Redis']
+                },
+                {
+                  title: 'GenAI',
+                  items: ['Azure OpenAI', 'RAG', 'Prompting', 'Guardrails']
+                },
+                {
+                  title: 'Product',
+                  items: ['Performance', 'Technical SEO', 'DX', 'Tech Lead / Review']
+                }
               ].map((group) => (
                 <Card key={group.title}>
                   <h3 className="text-sm font-semibold">{group.title}</h3>
@@ -109,8 +123,8 @@ export default function HomePage() {
             <Card>
               <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                 <p className="text-sm text-slate-600 dark:text-slate-300">
-                  Shipping real-time product experiences, hardening security (RLS), and integrating
-                  practical AI features into user-facing workflows.
+                  Shipping complex UI with reliable data flows, pushing performance baselines, and
+                  integrating practical GenAI features (RAG / Generative UI) into real workflows.
                 </p>
                 <Link href="/about" className={buttonClasses({ variant: 'secondary', size: 'sm' })}>
                   About me

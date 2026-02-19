@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { siteConfig } from '@/lib/site';
+import { hasLink, siteConfig } from '@/lib/site';
 import { Container } from '@/components/ui/container';
 import { Section } from '@/components/ui/section';
 import { Card } from '@/components/ui/card';
@@ -40,22 +40,26 @@ export default function ContactPage() {
               <Card>
                 <h3 className="text-sm font-semibold">Social</h3>
                 <div className="mt-3 space-y-2 text-sm">
-                  <a
-                    href={siteConfig.links.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="block underline underline-offset-4"
-                  >
-                    GitHub
-                  </a>
-                  <a
-                    href={siteConfig.links.linkedin}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="block underline underline-offset-4"
-                  >
-                    LinkedIn
-                  </a>
+                  {hasLink(siteConfig.links.github) ? (
+                    <a
+                      href={siteConfig.links.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block underline underline-offset-4"
+                    >
+                      GitHub
+                    </a>
+                  ) : null}
+                  {hasLink(siteConfig.links.linkedin) ? (
+                    <a
+                      href={siteConfig.links.linkedin}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block underline underline-offset-4"
+                    >
+                      LinkedIn
+                    </a>
+                  ) : null}
                 </div>
               </Card>
             </div>
